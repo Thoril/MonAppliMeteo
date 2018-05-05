@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">MyIPInfoDB</string>
-    <string name="longitude">Longitude</string>
-    <string name="latitude">Latitude</string>
+    <string name="app_name">Ma Météo</string>
     <string name="rechercher">Rechercher</string>
-    <string name="adresse_ip">Boulieu</string>
+    <string name="adresse">Boulieu</string>
 </resources>

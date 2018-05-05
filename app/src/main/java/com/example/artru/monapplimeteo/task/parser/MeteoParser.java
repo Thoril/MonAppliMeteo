@@ -63,7 +63,9 @@ public class MeteoParser {
                                 Log.d(TAG, xpp.getAttributeValue(0));
                                 break;
                             case "temperature":
-                                data.setTemperature(xpp.getAttributeValue(1));
+                                int tmp = Math.round(Float.parseFloat(xpp.getAttributeValue(1)));
+                                tmp = tmp -273;
+                                data.setTemperature(Integer.toString(tmp));
                                 Log.d(TAG, xpp.getAttributeValue(1));
                                 break;
                             case "pressure":
