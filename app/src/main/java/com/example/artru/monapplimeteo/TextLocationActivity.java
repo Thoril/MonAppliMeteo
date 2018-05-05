@@ -15,14 +15,18 @@ public class TextLocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_text_location);
 
         Bundle b = getIntent().getExtras();
-        MeteoList maListe  =  b.getParcelable("data");
-
-        Log.i(TAG, "Arrivé des données  Nombre de data Météo : " + maListe.size());
-        if(maListe.size()!=0) {
-            TextView latText = (TextView) findViewById(R.id.latitude);
-            latText.setText(maListe.get(0).getSymbole());
-            TextView lonText = (TextView) findViewById(R.id.longitude);
-            lonText.setText(maListe.get(0).getSymbole());
+        MeteoList maListe  = null;
+        if (b != null) {
+            maListe = b.getParcelable("data");
+        }
+        if (maListe != null) {
+            Log.i(TAG, "Arrivé des données  Nombre de data Météo : " + maListe.size());
+            if (maListe.size() != 0) {
+                TextView latText = findViewById(R.id.latitude);
+                latText.setText(maListe.get(0).getSymbole());
+                TextView lonText = findViewById(R.id.longitude);
+                lonText.setText(maListe.get(0).getTemperature());
+            }
         }
     }
 }
