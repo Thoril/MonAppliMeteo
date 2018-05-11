@@ -179,7 +179,7 @@
                 android:layout_height="match_parent" >
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/day2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Button" />
@@ -208,7 +208,7 @@
                 android:layout_height="match_parent" >
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/day3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Button" />
@@ -237,7 +237,7 @@
                 android:layout_height="match_parent" >
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/day4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Button" />
@@ -266,7 +266,7 @@
                 android:layout_height="match_parent" >
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/day5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Button" />

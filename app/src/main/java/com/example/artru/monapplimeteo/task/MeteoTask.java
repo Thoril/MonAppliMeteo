@@ -84,7 +84,7 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
             //PHASE 3: recherche des données météos
             publishProgress("Connexion au serveur météo");
             try {
-                this.url_meteo = url_prefixed_meteo + "lat=" + dataLocation.getLatitude() + "&lon=" + dataLocation.getLongitude() + "&mode=xml&APPID=" + meteoKey+"&lang=en";
+                this.url_meteo = url_prefixed_meteo + "lat=" + dataLocation.getLatitude() + "&lon=" + dataLocation.getLongitude() + "&mode=xml&APPID=" + meteoKey+"&lang=fr";
                 Request request = new Request.Builder().url(url_meteo).build();
                 Response http_response = this.okHttpClient.newCall(request).execute();
                 String xmlData = http_response.body().string();

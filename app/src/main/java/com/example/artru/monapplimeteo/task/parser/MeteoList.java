@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
     protected MeteoList(Parcel in) {
@@ -74,5 +75,23 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
             this.add(meteoData);
         }
 
+
     }
+
+    public ArrayList<String> getDays() {
+        if(this.isEmpty()) return null;
+        ArrayList<String> days = new ArrayList<String>();
+        days.add(this.get(0).getDateDebut().substring(0,10));
+        int indice = 0;
+        for(int i =1; i< this.size(); i++){
+            if(!Objects.equals(this.get(i).getDateDebut().substring(0, 10), days.get(indice))){
+                days.add(this.get(i).getDateDebut().substring(0,10));
+                indice++;
+            }
+        }
+        return days;
+    }
+
+
+
 }
