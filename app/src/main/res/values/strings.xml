@@ -2,4 +2,5 @@
     <string name="app_name">Ma Météo</string>
     <string name="rechercher">Rechercher</string>
     <string name="adresse">Boulieu</string>
+    <string name="image_description">symbole météorologique</string>
 </resources>

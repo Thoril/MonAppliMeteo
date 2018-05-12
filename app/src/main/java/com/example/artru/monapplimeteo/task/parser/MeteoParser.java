@@ -1,5 +1,7 @@
 package com.example.artru.monapplimeteo.task.parser;
 
+import android.icu.text.DecimalFormat;
+import android.icu.text.NumberFormat;
 import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -58,14 +60,18 @@ public class MeteoParser {
                                 Log.d(TAG, xpp.getAttributeValue(2));
                                 break;
                             case "windSpeed":
-                                data.setWindSpeed(xpp.getAttributeValue(0));
+                                double windSpeed = Double.parseDouble(xpp.getAttributeValue(0));
+                                windSpeed = windSpeed * 3.6;
+                                NumberFormat nf = new DecimalFormat("0.#");
+                                data.setWindSpeed(nf.format(windSpeed).replaceAll(",","."));
                                 data.setWindDescription(xpp.getAttributeValue(1));
                                 Log.d(TAG, xpp.getAttributeValue(0));
                                 break;
                             case "temperature":
-                                int tmp = Math.round(Float.parseFloat(xpp.getAttributeValue(1)));
-                                tmp = tmp -273;
-                                data.setTemperature(Integer.toString(tmp));
+                                double tmp = Double.parseDouble(xpp.getAttributeValue(1));
+                                tmp = tmp - 273;
+                                NumberFormat nf2 = new DecimalFormat("0.#");
+                                data.setTemperature(nf2.format(tmp).replaceAll(",","."));
                                 Log.d(TAG, xpp.getAttributeValue(1));
                                 break;
                             case "pressure":
