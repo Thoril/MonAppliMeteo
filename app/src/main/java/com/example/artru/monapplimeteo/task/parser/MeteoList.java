@@ -96,7 +96,7 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
         float min = Float.MAX_VALUE;
         ArrayList<String> tempDay = new ArrayList<String>();
         for(int i =0; i< this.size(); i++){
-            if(!Objects.equals(this.get(i).getDateDebut().substring(0, 10), day))
+            if(Objects.equals(this.get(i).getDateDebut().substring(0, 10), day))
                 tempDay.add(this.get(i).getTemperature());
         }
         for(String temp : tempDay ){
@@ -110,7 +110,7 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
         float max = Float.MIN_VALUE;
         ArrayList<String> tempDay = new ArrayList<String>();
         for(int i =0; i< this.size(); i++){
-            if(!Objects.equals(this.get(i).getDateDebut().substring(0, 10), day))
+            if(Objects.equals(this.get(i).getDateDebut().substring(0, 10), day))
                 tempDay.add(this.get(i).getTemperature());
         }
         for(String temp : tempDay ){
@@ -118,6 +118,16 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
                 max = Float.parseFloat(temp);
         }
         return max;
+    }
+
+    public MeteoList getDataDay(String day){
+        MeteoList dataDay = new MeteoList();
+        for (MeteoData meteoData : this ) {
+            if(Objects.equals(meteoData.getDateDebut().substring(0, 10), day)){
+                dataDay.add(meteoData);
+            }
+        }
+        return dataDay;
     }
 
 

@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.artru.monapplimeteo.TextLocationActivity" />
+        <activity android:name=".DetailsDayActivity" />
     </application>
 
 </manifest>

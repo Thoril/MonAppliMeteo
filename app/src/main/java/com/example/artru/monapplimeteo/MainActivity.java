@@ -28,18 +28,14 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
-        progressDialog.setTitle("Please Wait");
-        progressDialog.setMessage("Preparing...");
+        progressDialog.setTitle("Patientez");
+        progressDialog.setMessage("Préparation...");
         progressDialog.show();
 
-        EditText et_ip = findViewById(R.id.ip);
-        String str_ip= et_ip.getText().toString();
-        Log.i(TAG,"ip:"+ str_ip);
-        /*
-        IpInfoTask ipInfoTask = new IpInfoTask(this, progressDialog);
-        ipInfoTask.execute(str_ip);
-        */
+        EditText et_adresse = findViewById(R.id.adresse);
+        String adresse = et_adresse.getText().toString();
+
         MeteoTask meteoTask = new MeteoTask(this,progressDialog);
-        meteoTask.execute(str_ip);
+        meteoTask.execute(adresse);
     }
 }

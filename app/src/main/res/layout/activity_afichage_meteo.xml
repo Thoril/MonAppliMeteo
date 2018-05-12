@@ -181,7 +181,8 @@
                 <Button
                     android:id="@+id/day2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:onClick="detailsDay1" />
 
                 <ImageView
                     android:id="@+id/imageView8"
@@ -208,7 +209,8 @@
                 <Button
                     android:id="@+id/day3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:onClick="detailsDay2" />
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -235,7 +237,8 @@
                 <Button
                     android:id="@+id/day4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:onClick="detailsDay3" />
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -263,6 +266,7 @@
                     android:id="@+id/day5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="detailsDay4"
                     android:textAlignment="center" />
 
                 <ImageView
