@@ -33,7 +33,6 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
     private OkHttpClient okHttpClient;
     private String url_meteo;
     private String url_geocoding;
-    @SuppressLint("StaticFieldLeak")
     private AppCompatActivity parentActivity;
     private ProgressDialog progressDialog;
 
@@ -52,26 +51,20 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
             GeocodingData dataLocation = null;
             MeteoList dataMeteo;
             this.url_geocoding = url_prefixed_geocoding + place + "&key=" + geocodingKey;
+
             // PHASE 1: requete http pour recuperer la longitude et latitude du lieu
+            publishProgress("Connexion au serveur de localisation");
             try {
-                publishProgress("Connexion au serveur de localisation");
 
                 Request request = new Request.Builder().url(url_geocoding).build();
                 Response http_response = this.okHttpClient.newCall(request).execute();
+                Log.i(TAG, "Url geocoding:" + url_geocoding);
 
                 String xmlData = http_response.body().string();
 
-                /*
-                //Temporisation pour voir l'affichage
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                */
-
                 // PHASE 2: parsing des données GPS
                 publishProgress("Traitement des données GPS");
+
                 GeocodingParser parser = new GeocodingParser(xmlData);
                 dataLocation = parser.getData();
                 Log.i(TAG, "Lat:" + dataLocation.getLatitude());
@@ -80,6 +73,7 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
             } catch (IOException | XmlPullParserException e) {
                 e.printStackTrace();
             }
+
 
             //PHASE 3: recherche des données météos
             publishProgress("Connexion au serveur météo");
@@ -115,5 +109,10 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
         intent.putExtra("data", meteoData);
         progressDialog.dismiss();
         this.parentActivity.startActivity(intent);
+    }
+
+    @Override
+    protected void onProgressUpdate(String... values) {
+        this.progressDialog.setMessage(values[0]);
     }
 }
