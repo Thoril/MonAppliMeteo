@@ -2,6 +2,7 @@ package com.example.artru.monapplimeteo.task.parser;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.example.artru.monapplimeteo.R;
 
@@ -15,6 +16,8 @@ public class MeteoData implements Parcelable{
     private String windDescription;
     private String clouds;
     private String humidity;
+    public static final String TAG = MeteoData.class.getName();
+
 
     public MeteoData() {
         this.dateDebut = "";
@@ -180,9 +183,11 @@ public class MeteoData implements Parcelable{
                 image = R.drawable.overcast;
                 break;
             case "shower rain":
+            case "moderate rain" :
                 image = R.drawable.shower_rain;
                 break;
             case "rain":
+            case "light rain":
                 image = night ? R.drawable.rain_night : R.drawable.rain_day;
                 break;
             case "thunderstorm":
@@ -195,6 +200,7 @@ public class MeteoData implements Parcelable{
                 image = R.drawable.mist;
                 break;
             default:
+                Log.d(TAG,symbol);
                 image = R.drawable.clear_day;
                 break;
         }

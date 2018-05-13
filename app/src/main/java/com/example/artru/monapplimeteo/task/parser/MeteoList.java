@@ -158,9 +158,11 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
                     symbolList[3]++;
                     break;
                 case "shower rain":
+                case "moderate rain" :
                     symbolList[4]++;
                     break;
                 case "rain":
+                case "light rain":
                     symbolList[5]++;
                     break;
                 case "thunderstorm":
