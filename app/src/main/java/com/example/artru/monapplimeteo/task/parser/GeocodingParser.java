@@ -8,10 +8,11 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 public class GeocodingParser {
     public  static final String TAG = GeocodingParser.class.getName();
-    private GeocodingData data;
+    private ArrayList<GeocodingData> data;
     private String xmlData;
     private XmlPullParserFactory factory;
     public enum Element {Null, Other, Adresse, Longitude, Latitude, Location}
@@ -22,14 +23,15 @@ public class GeocodingParser {
         data = null;
     }
 
-    private GeocodingData parse(){
-        GeocodingData result = new GeocodingData();
-        try {
+    private ArrayList<GeocodingData> parse(){
+        ArrayList<GeocodingData> result = new ArrayList<GeocodingData>();
+              try {
             XmlPullParser xpp = factory.newPullParser();
             xpp.setInput(new StringReader(this.xmlData));
             int eventType = xpp.getEventType();
             Element lastElement = Element.Null;
             Boolean location = false;
+            GeocodingData geocodingData = new GeocodingData();
             while(eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
                     case XmlPullParser.START_DOCUMENT:
@@ -41,21 +43,24 @@ public class GeocodingParser {
                             lastElement = Element.Location;
                             location = true;
                         } else if (xpp.getName().equals("formatted_adress")) {
+                            geocodingData = new GeocodingData();
                             lastElement = Element.Adresse;
                         }else if (xpp.getName().equals("lat")) {
                             lastElement = Element.Latitude;
                         }else if (xpp.getName().equals("lng")) {
-                            lastElement = Element.Longitude;
+                            lastElement
+                                    = Element.Longitude;
                         }
                         break;
                     case XmlPullParser.TEXT:
                         Log.d(TAG, "Text " + xpp.getText());
                         if (lastElement.equals(Element.Latitude) && location) {
-                            result.setLatitude(xpp.getText());
+                            geocodingData.setLatitude(xpp.getText());
                         } else if (lastElement.equals(Element.Longitude) && location) {
-                            result.setLongitude(xpp.getText());
+                            geocodingData.setLongitude(xpp.getText());
+                            result.add(geocodingData);
                         }else if(lastElement.equals(Element.Adresse)){
-                            result.setAdresse(xpp.getText());
+                            geocodingData.setAdresse(xpp.getText());
                         }
                         break;
                     case XmlPullParser.END_TAG:
@@ -74,7 +79,7 @@ public class GeocodingParser {
         return result;
     }
 
-    public GeocodingData getData(){
+    public ArrayList<GeocodingData> getData(){
         if(data ==null){
             data = parse();
         }
