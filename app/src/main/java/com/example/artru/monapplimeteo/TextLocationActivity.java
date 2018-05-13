@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
@@ -24,6 +25,7 @@ public class TextLocationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afichage_meteo);
 
@@ -49,13 +51,15 @@ public class TextLocationActivity extends AppCompatActivity {
                 heure.setText(f.format(d));
 
                 TextView symbol = findViewById( R.id.symbol);
-                symbol.setText(listMeteoData.get(0).getSymbole());
+                String sym = listMeteoData.get(0).getSymbole();
+                sym = sym.replaceFirst(".",(sym.charAt(0)+"").toUpperCase());
+                symbol.setText(sym);
 
                 TextView wind = findViewById(R.id.wind);
                 wind.setText(listMeteoData.get(0).getWindDescription());
 
                 TextView windSpeed = findViewById(R.id.windSpeed);
-                windSpeed.setText(String.format("%s%s Km / h", listMeteoData.get(0).getWindDirection(), listMeteoData.get(0).getWindSpeed()));
+                windSpeed.setText(String.format("%s Km / h", listMeteoData.get(0).getWindSpeed()));
                 //ImageView meteo = findViewById(R.id.meteo);
 
                 //Placement des heures 4 prochaines données météos
