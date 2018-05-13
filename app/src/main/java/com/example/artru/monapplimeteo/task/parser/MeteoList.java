@@ -2,6 +2,7 @@ package com.example.artru.monapplimeteo.task.parser;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -10,6 +11,7 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
     protected MeteoList(Parcel in) {
         this.getFromParcel(in);
     }
+    public static final String TAG = MeteoList.class.getName();
 
     public MeteoList() {
     }
@@ -81,9 +83,9 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
     public ArrayList<String> getDays() {
         if(this.isEmpty()) return null;
         ArrayList<String> days = new ArrayList<String>();
-        days.add(this.get(0).getDateDebut().substring(0,10));
+        days.add(this.get(1).getDateDebut().substring(0,10));
         int indice = 0;
-        for(int i =1; i< this.size(); i++){
+        for(int i =2; i< this.size(); i++){
             if(!Objects.equals(this.get(i).getDateDebut().substring(0, 10), days.get(indice))){
                 days.add(this.get(i).getDateDebut().substring(0,10));
                 indice++;
@@ -95,9 +97,9 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
     public float getMinDay(String day){
         float min = Float.MAX_VALUE;
         ArrayList<String> tempDay = new ArrayList<String>();
-        for(int i =0; i< this.size(); i++){
-            if(Objects.equals(this.get(i).getDateDebut().substring(0, 10), day))
-                tempDay.add(this.get(i).getTemperature());
+        MeteoList meteoList = this.getDataDay(day);
+        for(MeteoData meteoData : meteoList){
+            tempDay.add(meteoData.getTemperature());
         }
         for(String temp : tempDay ){
             if(min > Float.parseFloat(temp))
@@ -109,9 +111,9 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
     public float getMaxDay(String day){
         float max = Float.MIN_VALUE;
         ArrayList<String> tempDay = new ArrayList<String>();
-        for(int i =0; i< this.size(); i++){
-            if(Objects.equals(this.get(i).getDateDebut().substring(0, 10), day))
-                tempDay.add(this.get(i).getTemperature());
+        MeteoList meteoList = this.getDataDay(day);
+        for(MeteoData meteoData : meteoList){
+            tempDay.add(meteoData.getTemperature());
         }
         for(String temp : tempDay ){
             if(max < Float.parseFloat(temp))
@@ -123,11 +125,99 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
     public MeteoList getDataDay(String day){
         MeteoList dataDay = new MeteoList();
         for (MeteoData meteoData : this ) {
-            if(Objects.equals(meteoData.getDateDebut().substring(0, 10), day)){
-                dataDay.add(meteoData);
+            if (!meteoData.getDateDebut().isEmpty()) {
+                if (Objects.equals(meteoData.getDateDebut().substring(0, 10), day)) {
+                    dataDay.add(meteoData);
+                }
             }
         }
         return dataDay;
+    }
+
+    public String getSymbolDay(String day){
+        String symbol;
+        MeteoList dataDay = this.getDataDay(day);
+        int[] symbolList =new int[9];
+        for(int i =0;i<9;i++){
+            symbolList[i] =0;
+        }
+        for (MeteoData meteoData : dataDay ) {
+            switch (meteoData.getSymbole()){
+                case "clear sky":
+                    symbolList[0]++;
+                    break;
+                case "few clouds":
+                    symbolList[1]++;
+                    break;
+                case "scattered clouds":
+                    symbolList[2]++;
+                    break;
+                case "broken clouds":
+                    symbolList[3]++;
+                    break;
+                case "shower rain":
+                    symbolList[4]++;
+                    break;
+                case "rain":
+                    symbolList[5]++;
+                    break;
+                case "thunderstorm":
+                    symbolList[6]++;
+                    break;
+                case "snow":
+                    symbolList[7]++;
+                    break;
+                case "mist":
+                    symbolList[8]++;
+                    break;
+                default:
+                    Log.d(TAG,meteoData.getSymbole() );
+                     break;
+            }
+        }
+        int valeurSymbol = 0;
+        int nboccurence = Integer.MIN_VALUE;
+        for(int i=0;i<9;i++){
+            if(nboccurence <= symbolList[i]){
+                nboccurence = symbolList[i];
+                valeurSymbol = i;
+            }
+        }
+
+        switch (valeurSymbol){
+            case 0:
+                symbol="clear sky";
+                break;
+            case 1:
+                symbol="few clouds";
+                break;
+            case 2:
+                symbol="scattered clouds";
+                break;
+            case 3:
+                symbol="broken clouds";
+                break;
+            case 4:
+                symbol="shower rain";
+                break;
+            case 5:
+                symbol="rain";
+                break;
+            case 6:
+                symbol="thunderstorm";
+                break;
+            case 7:
+                symbol="snow";
+                break;
+            case 8:
+                symbol="mist";
+                break;
+            default:
+                symbol ="clear sky";
+                break;
+
+        }
+        return symbol;
     }
 
 

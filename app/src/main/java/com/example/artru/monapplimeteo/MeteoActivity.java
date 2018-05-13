@@ -1,12 +1,15 @@
 package com.example.artru.monapplimeteo;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
@@ -18,9 +21,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class TextLocationActivity extends AppCompatActivity {
+public class MeteoActivity extends AppCompatActivity {
 
-    private static String TAG = TextLocationActivity.class.getName();
+    private static String TAG = MeteoActivity.class.getName();
     private MeteoList listMeteoData; 
 
     @Override
@@ -37,30 +40,43 @@ public class TextLocationActivity extends AppCompatActivity {
         if (listMeteoData != null) {
             Log.i(TAG, "Arrivé des données  Nombre de data Météo : " + listMeteoData.size());
             if (listMeteoData.size() != 0) {
+
+                //Placement de la ville
+                TextView city = findViewById(R.id.city);
+                city.setText(listMeteoData.get(0).getSymbole());
+                //Placement de la date
                 Date d = new Date();
                 SimpleDateFormat f = new SimpleDateFormat("EEE d MMMM");
                 String s = f.format(d);
                 TextView dateText = findViewById(R.id.date);
                 dateText.setText(s);
 
+                //Placement de la température
                 TextView tempText = findViewById(R.id.temperature);
-                tempText.setText(String.format("%s°C", listMeteoData.get(0).getTemperature()));
+                tempText.setText(String.format("%s°C", listMeteoData.get(1).getTemperature()));
 
+                //Placement de l'heure actuelle
                 TextView heure = findViewById(R.id.heure);
                 f = new SimpleDateFormat("HH:mm ");
                 heure.setText(f.format(d));
 
+                //Placement de la description du temps actuelle
                 TextView symbol = findViewById( R.id.symbol);
-                String sym = listMeteoData.get(0).getSymbole();
+                String sym = listMeteoData.get(1).getSymbole();
                 sym = sym.replaceFirst(".",(sym.charAt(0)+"").toUpperCase());
                 symbol.setText(sym);
 
+                //Placement du type de vent actuelle
                 TextView wind = findViewById(R.id.wind);
-                wind.setText(listMeteoData.get(0).getWindDescription());
+                wind.setText(listMeteoData.get(1).getWindDescription());
 
+                //Placement de la vitesse du vent actuelle
                 TextView windSpeed = findViewById(R.id.windSpeed);
-                windSpeed.setText(String.format("%s Km / h", listMeteoData.get(0).getWindSpeed()));
-                //ImageView meteo = findViewById(R.id.meteo);
+                windSpeed.setText(String.format("%s Km / h", listMeteoData.get(1).getWindSpeed()));
+
+                //Placement de l'image de la meteo actuelle
+                ImageView meteo = findViewById(R.id.meteo);
+                //meteo.setImageResource(this.getImageFromSymbol(listMeteoData.get(1).getSymbole()));
 
                 //Placement des heures 4 prochaines données météos
                 TextView h1 = findViewById(R.id.h1);
@@ -134,7 +150,7 @@ public class TextLocationActivity extends AppCompatActivity {
     public void detailsDay1(View view){
         Intent intent  = new Intent(this,DetailsDayActivity.class);
         ArrayList<String> days = listMeteoData.getDays();
-        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(1));
+        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(4));
         intent.putExtra("data", (Parcelable) dataDay);
         this.startActivity(intent);
     }
@@ -142,7 +158,7 @@ public class TextLocationActivity extends AppCompatActivity {
     public void detailsDay2(View view){
         Intent intent  = new Intent(this,DetailsDayActivity.class);
         ArrayList<String> days = listMeteoData.getDays();
-        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(2));
+        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(1));
         intent.putExtra("data", (Parcelable) dataDay);
         this.startActivity(intent);
     }
@@ -150,7 +166,7 @@ public class TextLocationActivity extends AppCompatActivity {
     public void detailsDay3(View view){
         Intent intent  = new Intent(this,DetailsDayActivity.class);
         ArrayList<String> days = listMeteoData.getDays();
-        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(3));
+        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(2));
         intent.putExtra("data", (Parcelable) dataDay);
         this.startActivity(intent);
     }
@@ -158,8 +174,47 @@ public class TextLocationActivity extends AppCompatActivity {
     public void detailsDay4(View view){
         Intent intent  = new Intent(this,DetailsDayActivity.class);
         ArrayList<String> days = listMeteoData.getDays();
-        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(4));
+        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(3));
         intent.putExtra("data", (Parcelable) dataDay);
         this.startActivity(intent);
     }
+
+    public int getImageFromSymbol(String symbol){
+        int image;
+        switch (symbol){
+            case "clear sky":
+                 image = R.drawable.background;
+                break;
+            case "few clouds":
+                image = R.drawable.background;
+                break;
+            case "scattered clouds":
+                image = R.drawable.background;
+                break;
+            case "broken clouds":
+                image = R.drawable.background;
+                break;
+            case "shower rain":
+                image = R.drawable.background;
+                break;
+            case "rain":
+                image = R.drawable.background;
+                break;
+            case "thunderstorm":
+                image = R.drawable.background;
+                break;
+            case "snow":
+                image = R.drawable.background;
+                break;
+            case "mist":
+                image = R.drawable.background;
+                break;
+            default:
+                image = R.drawable.background;
+                break;
+        }
+        return image;
+    }
 }
+
+

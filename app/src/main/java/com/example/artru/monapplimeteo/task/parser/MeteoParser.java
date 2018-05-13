@@ -33,7 +33,7 @@ public class MeteoParser {
 
             MeteoData data = new MeteoData();
             Log.d(TAG, "try fonction parse");
-
+            boolean location =false;
             while(eventType != XmlPullParser.END_DOCUMENT){
                 switch (eventType) {
                     case XmlPullParser.START_DOCUMENT:
@@ -84,15 +84,24 @@ public class MeteoParser {
                                 data.setClouds(xpp.getAttributeValue(0));
                                 Log.d(TAG, xpp.getAttributeValue(0));
                                 break;
+                            case "name":
+                                location = true;
+                                data = new MeteoData();
+                                break;
                             default:
                                 break;
                         }
                         break;
                     case XmlPullParser.TEXT:
+                        if(location){
+                            data.setSymbole(xpp.getText());
+                            location = false;
+                        }
+
                          break;
                     case XmlPullParser.END_TAG:
                          Log.d(TAG, "End tag " + xpp.getName());
-                        if (xpp.getName().equals("time")){
+                        if (xpp.getName().equals("time") || xpp.getName().equals("name")){
                            dataList.add(data);
                         }
                         break;

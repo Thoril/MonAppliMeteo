@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.artru.monapplimeteo.TextLocationActivity;
+import com.example.artru.monapplimeteo.MeteoActivity;
 import com.example.artru.monapplimeteo.task.parser.GeocodingData;
 import com.example.artru.monapplimeteo.task.parser.GeocodingParser;
 import com.example.artru.monapplimeteo.task.parser.MeteoData;
@@ -84,7 +84,7 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
             //PHASE 3: recherche des données météos
             publishProgress("Connexion au serveur météo");
             try {
-                this.url_meteo = url_prefixed_meteo + "lat=" + dataLocation.getLatitude() + "&lon=" + dataLocation.getLongitude() + "&mode=xml&APPID=" + meteoKey+"&lang=fr";
+                this.url_meteo = url_prefixed_meteo + "lat=" + dataLocation.getLatitude() + "&lon=" + dataLocation.getLongitude() + "&mode=xml&APPID=" + meteoKey+"&lang=en";
                 Request request = new Request.Builder().url(url_meteo).build();
                 Response http_response = this.okHttpClient.newCall(request).execute();
                 String xmlData = http_response.body().string();
@@ -109,7 +109,7 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
     @Override
     protected void onPostExecute(ArrayList<MeteoData> meteoData) {
         super.onPostExecute(meteoData);
-        Intent intent  = new Intent(this.parentActivity,TextLocationActivity.class);
+        Intent intent  = new Intent(this.parentActivity,MeteoActivity.class);
         Log.i(TAG, "On post Execute Nombre de data Météo : " + meteoData.size());
         Log.i(TAG, meteoData.get(0).toString());
         intent.putExtra("data", meteoData);
