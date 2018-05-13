@@ -168,34 +168,34 @@ public class MeteoData implements Parcelable{
 
         switch (symbol){
             case "clear sky":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = night ? R.drawable.clear_night : R.drawable.clear_day;
                 break;
             case "few clouds":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = night ? R.drawable.few_clouds_night : R.drawable.few_clouds_day;
                 break;
             case "scattered clouds":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = R.drawable.cloudy;
                 break;
             case "broken clouds":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = R.drawable.overcast;
                 break;
             case "shower rain":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = R.drawable.shower_rain;
                 break;
             case "rain":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = night ? R.drawable.rain_night : R.drawable.rain_day;
                 break;
             case "thunderstorm":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = R.drawable.thuderstorm;
                 break;
             case "snow":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = R.drawable.snow;
                 break;
             case "mist":
-                image = night ? R.drawable.background : R.drawable.background;
+                image = R.drawable.mist;
                 break;
             default:
-                image = R.drawable.background;
+                image = R.drawable.clear_day;
                 break;
         }
         return image;

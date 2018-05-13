@@ -188,34 +188,34 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
 
         switch (valeurSymbol){
             case 0:
-                image = R.drawable.background;
+                image = R.drawable.clear_day;
                 break;
             case 1:
-                image = R.drawable.background;
+                image = R.drawable.few_clouds_day;
                 break;
             case 2:
-                image = R.drawable.background;
+                image = R.drawable.cloudy;
                 break;
             case 3:
-                image = R.drawable.background;
+                image = R.drawable.overcast;
                 break;
             case 4:
-                image = R.drawable.background;
+                image = R.drawable.shower_rain;
                 break;
             case 5:
-                image = R.drawable.background;
+                image = R.drawable.rain_day;
                 break;
             case 6:
-                image = R.drawable.background;
+                image = R.drawable.thuderstorm;
                 break;
             case 7:
-                image = R.drawable.background;
+                image = R.drawable.snow;
                 break;
             case 8:
-                image = R.drawable.background;
+                image = R.drawable.mist;
                 break;
             default:
-                image = R.drawable.background;
+                image = R.drawable.clear_day;
                 break;
 
         }
