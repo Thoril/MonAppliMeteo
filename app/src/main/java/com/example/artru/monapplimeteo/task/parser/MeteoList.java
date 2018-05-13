@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.example.artru.monapplimeteo.R;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -134,8 +136,8 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
         return dataDay;
     }
 
-    public String getSymbolDay(String day){
-        String symbol;
+    public int getImageDay(String day){
+        int image;
         MeteoList dataDay = this.getDataDay(day);
         int[] symbolList =new int[9];
         for(int i =0;i<9;i++){
@@ -186,38 +188,38 @@ public class MeteoList extends ArrayList<MeteoData> implements Parcelable {
 
         switch (valeurSymbol){
             case 0:
-                symbol="clear sky";
+                image = R.drawable.background;
                 break;
             case 1:
-                symbol="few clouds";
+                image = R.drawable.background;
                 break;
             case 2:
-                symbol="scattered clouds";
+                image = R.drawable.background;
                 break;
             case 3:
-                symbol="broken clouds";
+                image = R.drawable.background;
                 break;
             case 4:
-                symbol="shower rain";
+                image = R.drawable.background;
                 break;
             case 5:
-                symbol="rain";
+                image = R.drawable.background;
                 break;
             case 6:
-                symbol="thunderstorm";
+                image = R.drawable.background;
                 break;
             case 7:
-                symbol="snow";
+                image = R.drawable.background;
                 break;
             case 8:
-                symbol="mist";
+                image = R.drawable.background;
                 break;
             default:
-                symbol ="clear sky";
+                image = R.drawable.background;
                 break;
 
         }
-        return symbol;
+        return image;
     }
 
 

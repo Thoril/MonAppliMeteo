@@ -1,8 +1,6 @@
 package com.example.artru.monapplimeteo;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -76,7 +74,7 @@ public class MeteoActivity extends AppCompatActivity {
 
                 //Placement de l'image de la meteo actuelle
                 ImageView meteo = findViewById(R.id.meteo);
-                //meteo.setImageResource(this.getImageFromSymbol(listMeteoData.get(1).getSymbole()));
+                meteo.setImageResource(listMeteoData.get(1).getImage());
 
                 //Placement des heures 4 prochaines données météos
                 TextView h1 = findViewById(R.id.h1);
@@ -97,6 +95,16 @@ public class MeteoActivity extends AppCompatActivity {
                 temph3.setText(String.format("%s°C", listMeteoData.get(3).getTemperature()));
                 TextView temph4 = findViewById(R.id.temph4);
                 temph4.setText(String.format("%s°C", listMeteoData.get(4).getTemperature()));
+
+                //Image des 4 prochaines données météos
+                ImageView symbh1 = findViewById(R.id.symbh1);
+                symbh1.setImageResource(listMeteoData.get(2).getImage());
+                ImageView symbh2 = findViewById(R.id.symbh2);
+                symbh2.setImageResource(listMeteoData.get(3).getImage());
+                ImageView symbh3 = findViewById(R.id.symbh3);
+                symbh3.setImageResource(listMeteoData.get(4).getImage());
+                ImageView symbh4 = findViewById(R.id.symbh4);
+                symbh4.setImageResource(listMeteoData.get(5).getImage());
 
                 //Modification des Boutons pour avoir le details d'un jour
                 ArrayList<String> days = listMeteoData.getDays();
@@ -121,6 +129,17 @@ public class MeteoActivity extends AppCompatActivity {
                 day4.setText(sdfAffichage.format(daysFormatte.get(3)));
                 Button day5 = findViewById(R.id.day5);
                 day5.setText(sdfAffichage.format(daysFormatte.get(4)));
+
+                //Placement des images des 5 prochaines jours
+                ImageView symbd2 = findViewById(R.id.symbd2);
+                symbd2.setImageResource(listMeteoData.getImageDay(days.get(1)));
+                ImageView symbd3 = findViewById(R.id.symbd3);
+                symbd3.setImageResource(listMeteoData.getImageDay(days.get(2)));
+                ImageView symbd4 = findViewById(R.id.symbd4);
+                symbd4.setImageResource(listMeteoData.getImageDay(days.get(3)));
+                ImageView symbd5 = findViewById(R.id.symbd5);
+                symbd5.setImageResource(listMeteoData.getImageDay(days.get(4)));
+
 
                 //Modification des minimums des 5 prochains jours
                 TextView minDay2 = findViewById(R.id.minDay2);
@@ -179,42 +198,6 @@ public class MeteoActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public int getImageFromSymbol(String symbol){
-        int image;
-        switch (symbol){
-            case "clear sky":
-                 image = R.drawable.background;
-                break;
-            case "few clouds":
-                image = R.drawable.background;
-                break;
-            case "scattered clouds":
-                image = R.drawable.background;
-                break;
-            case "broken clouds":
-                image = R.drawable.background;
-                break;
-            case "shower rain":
-                image = R.drawable.background;
-                break;
-            case "rain":
-                image = R.drawable.background;
-                break;
-            case "thunderstorm":
-                image = R.drawable.background;
-                break;
-            case "snow":
-                image = R.drawable.background;
-                break;
-            case "mist":
-                image = R.drawable.background;
-                break;
-            default:
-                image = R.drawable.background;
-                break;
-        }
-        return image;
-    }
 }
 
 

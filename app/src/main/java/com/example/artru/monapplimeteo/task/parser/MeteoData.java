@@ -3,6 +3,8 @@ package com.example.artru.monapplimeteo.task.parser;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.artru.monapplimeteo.R;
+
 public class MeteoData implements Parcelable{
     private String dateDebut;
     private String dateFin;
@@ -152,5 +154,50 @@ public class MeteoData implements Parcelable{
         }
     };
 
+    public int getHeure(){
+        String heure = this.getDateDebut().substring(11,13);
+        return Integer.parseInt(heure);
+    }
 
+    public int getImage(){
+        int image;
+        boolean night;
+        int heure = this.getHeure();
+        String symbol = this.getSymbole();
+        night = heure < 8 || heure > 20;
+
+        switch (symbol){
+            case "clear sky":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "few clouds":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "scattered clouds":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "broken clouds":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "shower rain":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "rain":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "thunderstorm":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "snow":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            case "mist":
+                image = night ? R.drawable.background : R.drawable.background;
+                break;
+            default:
+                image = R.drawable.background;
+                break;
+        }
+        return image;
+    }
 }

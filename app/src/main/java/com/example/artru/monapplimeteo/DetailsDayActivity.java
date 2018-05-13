@@ -3,6 +3,7 @@ package com.example.artru.monapplimeteo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.artru.monapplimeteo.task.parser.MeteoList;
@@ -56,6 +57,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed1.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(0).getWindSpeed()));
             TextView windDirection1 = findViewById(R.id.windDirection1);
             windDirection1.setText(String.format("Direction: %s", listMeteoData.get(0).getWindDirection()));
+            ImageView symb1 = findViewById(R.id.symbole1);
+            symb1.setImageResource(listMeteoData.get(0).getImage());
 
             //Affichage du 2eme creneau horaire
             TextView h2 = findViewById(R.id.h2);
@@ -70,6 +73,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed2.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(1).getWindSpeed()));
             TextView windDirection2 = findViewById(R.id.windDirection2);
             windDirection2.setText(String.format("Direction: %s", listMeteoData.get(1).getWindDirection()));
+            ImageView symb2 = findViewById(R.id.symbole2);
+            symb2.setImageResource(listMeteoData.get(1).getImage());
 
             //Affichage du 3eme creneau horaire
             TextView h3 = findViewById(R.id.h3);
@@ -84,6 +89,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed3.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(2).getWindSpeed()));
             TextView windDirection3 = findViewById(R.id.windDirection3);
             windDirection3.setText(String.format("Direction: %s", listMeteoData.get(2).getWindDirection()));
+            ImageView symb3 = findViewById(R.id.symbole3);
+            symb3.setImageResource(listMeteoData.get(2).getImage());
 
             //Affichage du 4eme creneau horaire
             TextView h4 = findViewById(R.id.h4);
@@ -98,6 +105,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed4.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(3).getWindSpeed()));
             TextView windDirection4 = findViewById(R.id.windDirection4);
             windDirection4.setText(String.format("Direction: %s", listMeteoData.get(3).getWindDirection()));
+            ImageView symb4 = findViewById(R.id.symbole4);
+            symb4.setImageResource(listMeteoData.get(3).getImage());
 
             //Affichage du 5eme creneau horaire
             TextView h5 = findViewById(R.id.h5);
@@ -112,6 +121,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed5.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(4).getWindSpeed()));
             TextView windDirection5 = findViewById(R.id.windDirection5);
             windDirection5.setText(String.format("Direction: %s", listMeteoData.get(4).getWindDirection()));
+            ImageView symb5 = findViewById(R.id.symbole5);
+            symb5.setImageResource(listMeteoData.get(4).getImage());
 
             //Affichage du 6eme creneau horaire
             TextView h6 = findViewById(R.id.h6);
@@ -126,6 +137,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed6.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(5).getWindSpeed()));
             TextView windDirection6 = findViewById(R.id.windDirection6);
             windDirection6.setText(String.format("Direction: %s", listMeteoData.get(5).getWindDirection()));
+            ImageView symb6 = findViewById(R.id.symbole6);
+            symb6.setImageResource(listMeteoData.get(5).getImage());
 
             //Affichage du 7eme creneau horaire
             TextView h7 = findViewById(R.id.h7);
@@ -140,6 +153,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed7.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(6).getWindSpeed()));
             TextView windDirection7 = findViewById(R.id.windDirection7);
             windDirection7.setText(String.format("Direction: %s", listMeteoData.get(6).getWindDirection()));
+            ImageView symb7 = findViewById(R.id.symbole7);
+            symb7.setImageResource(listMeteoData.get(6).getImage());
 
             //Affichage du 8eme creneau horaire
             TextView h8 = findViewById(R.id.h8);
@@ -154,6 +169,8 @@ public class DetailsDayActivity extends AppCompatActivity {
             windSpeed8.setText(String.format("Vitesse du vent: %s Km / h", listMeteoData.get(7).getWindSpeed()));
             TextView windDirection8 = findViewById(R.id.windDirection8);
             windDirection8.setText(String.format("Direction: %s", listMeteoData.get(7).getWindDirection()));
+            ImageView symb8 = findViewById(R.id.symbole8);
+            symb8.setImageResource(listMeteoData.get(7).getImage());
         }
     }
 
