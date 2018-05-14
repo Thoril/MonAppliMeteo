@@ -14,12 +14,18 @@
         <activity android:name="com.example.artru.monapplimeteo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
         </activity>
         <activity android:name="com.example.artru.monapplimeteo.MeteoActivity" />
         <activity android:name=".DetailsDayActivity" />
+
+        <provider
+            android:authorities="com.example.artru.monapplimeteo.task.lastSearchProvider"
+            android:name=".task.LastSearchProvider" />
     </application>
 
 </manifest>
