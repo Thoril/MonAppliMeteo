@@ -62,9 +62,9 @@ public class MeteoActivity extends AppCompatActivity {
                 heure.setText(f.format(d));
 
                 //Placement de la description du temps actuelle
-                Log.d(TAG,"Heure du premier symbol: " + listMeteoData.get(1).getHeure() );
+                Log.d(TAG,"Heure du premier symbol: " + listMeteoData.get(2).getHeure() );
                 TextView symbol = findViewById( R.id.symbol);
-                String sym = listMeteoData.get(1).getSymbole();
+                String sym = listMeteoData.get(2).getSymbole();
                 sym = sym.replaceFirst(".",(sym.charAt(0)+"").toUpperCase());
                 symbol.setText(sym);
 
@@ -74,21 +74,21 @@ public class MeteoActivity extends AppCompatActivity {
 
                 //Placement de la vitesse du vent actuelle
                 TextView windSpeed = findViewById(R.id.windSpeed);
-                windSpeed.setText(String.format("%s Km / h", listMeteoData.get(1).getWindSpeed()));
+                windSpeed.setText(String.format("%s Km / h", listMeteoData.get(2).getWindSpeed()));
 
                 //Placement de l'image de la meteo actuelle
                 ImageView meteo = findViewById(R.id.meteo);
-                meteo.setImageResource(listMeteoData.get(1).getImage());
+                meteo.setImageResource(listMeteoData.get(2).getImage());
 
                 //Placement des heures 4 prochaines données météos
                 TextView h1 = findViewById(R.id.h1);
-                h1.setText(listMeteoData.get(2).getDateDebut().substring(11,16));
+                h1.setText(listMeteoData.get(3).getDateDebut().substring(11,16));
                 TextView h2 = findViewById(R.id.h2);
-                h2.setText(listMeteoData.get(3).getDateDebut().substring(11,16));
+                h2.setText(listMeteoData.get(4).getDateDebut().substring(11,16));
                 TextView h3 = findViewById(R.id.h3);
-                h3.setText(listMeteoData.get(4).getDateDebut().substring(11,16));
+                h3.setText(listMeteoData.get(5).getDateDebut().substring(11,16));
                 TextView h4 = findViewById(R.id.h4);
-                h4.setText(listMeteoData.get(5).getDateDebut().substring(11,16));
+                h4.setText(listMeteoData.get(6).getDateDebut().substring(11,16));
 
                 //Placement des températures des 4 prochaines données météos
                 TextView temph1 = findViewById(R.id.temph1);
@@ -102,13 +102,13 @@ public class MeteoActivity extends AppCompatActivity {
 
                 //Image des 4 prochaines données météos
                 ImageView symbh1 = findViewById(R.id.symbh1);
-                symbh1.setImageResource(listMeteoData.get(2).getImage());
+                symbh1.setImageResource(listMeteoData.get(3).getImage());
                 ImageView symbh2 = findViewById(R.id.symbh2);
-                symbh2.setImageResource(listMeteoData.get(3).getImage());
+                symbh2.setImageResource(listMeteoData.get(4).getImage());
                 ImageView symbh3 = findViewById(R.id.symbh3);
-                symbh3.setImageResource(listMeteoData.get(4).getImage());
+                symbh3.setImageResource(listMeteoData.get(5).getImage());
                 ImageView symbh4 = findViewById(R.id.symbh4);
-                symbh4.setImageResource(listMeteoData.get(5).getImage());
+                symbh4.setImageResource(listMeteoData.get(6).getImage());
 
                 //Modification des Boutons pour avoir le details d'un jour
                 ArrayList<String> days = listMeteoData.getDays();

@@ -168,7 +168,7 @@ public class MeteoData implements Parcelable{
         int heure = this.getHeure();
 
         String symbol = this.getSymbole();
-        night = heure < 8 || heure > 20;
+        night = heure <= 6 || heure >= 21;
 
         switch (symbol){
             case "clear sky":
@@ -178,16 +178,17 @@ public class MeteoData implements Parcelable{
                 image = night ? R.drawable.few_clouds_night : R.drawable.few_clouds_day;
                 break;
             case "scattered clouds":
+            case "broken clouds":
                 image = R.drawable.cloudy;
                 break;
-            case "broken clouds":
+            case "overcast clouds":
                 image = R.drawable.overcast;
                 break;
             case "shower rain":
-            case "moderate rain" :
+            case "rain":
                 image = R.drawable.shower_rain;
                 break;
-            case "rain":
+            case "moderate rain":
             case "light rain":
                 image = night ? R.drawable.rain_night : R.drawable.rain_day;
                 break;
