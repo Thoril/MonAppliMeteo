@@ -35,7 +35,10 @@ public class MeteoActivity extends AppCompatActivity {
         if (b != null) {
             listMeteoData = b.getParcelable("data");
         }
-        if (listMeteoData != null) {
+        if(listMeteoData == null){
+            TextView city = findViewById(R.id.city);
+            city.setText("Adresse incorrecte");
+        }else {
             Log.i(TAG, "Arrivé des données  Nombre de data Météo : " + listMeteoData.size());
             if (listMeteoData.size() != 0) {
 
@@ -59,6 +62,7 @@ public class MeteoActivity extends AppCompatActivity {
                 heure.setText(f.format(d));
 
                 //Placement de la description du temps actuelle
+                Log.d(TAG,"Heure du premier symbol: " + listMeteoData.get(1).getHeure() );
                 TextView symbol = findViewById( R.id.symbol);
                 String sym = listMeteoData.get(1).getSymbole();
                 sym = sym.replaceFirst(".",(sym.charAt(0)+"").toUpperCase());
@@ -78,23 +82,23 @@ public class MeteoActivity extends AppCompatActivity {
 
                 //Placement des heures 4 prochaines données météos
                 TextView h1 = findViewById(R.id.h1);
-                h1.setText(listMeteoData.get(1).getDateDebut().substring(11,16));
+                h1.setText(listMeteoData.get(2).getDateDebut().substring(11,16));
                 TextView h2 = findViewById(R.id.h2);
-                h2.setText(listMeteoData.get(2).getDateDebut().substring(11,16));
+                h2.setText(listMeteoData.get(3).getDateDebut().substring(11,16));
                 TextView h3 = findViewById(R.id.h3);
-                h3.setText(listMeteoData.get(3).getDateDebut().substring(11,16));
+                h3.setText(listMeteoData.get(4).getDateDebut().substring(11,16));
                 TextView h4 = findViewById(R.id.h4);
-                h4.setText(listMeteoData.get(4).getDateDebut().substring(11,16));
+                h4.setText(listMeteoData.get(5).getDateDebut().substring(11,16));
 
                 //Placement des températures des 4 prochaines données météos
                 TextView temph1 = findViewById(R.id.temph1);
-                temph1.setText(String.format("%s°C", listMeteoData.get(1).getTemperature()));
+                temph1.setText(String.format("%s°C", listMeteoData.get(2).getTemperature()));
                 TextView temph2 = findViewById(R.id.temph2);
-                temph2.setText(String.format("%s°C", listMeteoData.get(2).getTemperature()));
+                temph2.setText(String.format("%s°C", listMeteoData.get(3).getTemperature()));
                 TextView temph3 = findViewById(R.id.temph3);
-                temph3.setText(String.format("%s°C", listMeteoData.get(3).getTemperature()));
+                temph3.setText(String.format("%s°C", listMeteoData.get(4).getTemperature()));
                 TextView temph4 = findViewById(R.id.temph4);
-                temph4.setText(String.format("%s°C", listMeteoData.get(4).getTemperature()));
+                temph4.setText(String.format("%s°C", listMeteoData.get(5).getTemperature()));
 
                 //Image des 4 prochaines données météos
                 ImageView symbh1 = findViewById(R.id.symbh1);
@@ -123,53 +127,48 @@ public class MeteoActivity extends AppCompatActivity {
                 }
                 Button day2 = findViewById(R.id.day2);
                 day2.setText(sdfAffichage.format(daysFormatte.get(1)));
+                day2.setVisibility(View.VISIBLE);
                 Button day3 = findViewById(R.id.day3);
                 day3.setText(sdfAffichage.format(daysFormatte.get(2)));
+                day3.setVisibility(View.VISIBLE);
                 Button day4 = findViewById(R.id.day4);
                 day4.setText(sdfAffichage.format(daysFormatte.get(3)));
-                Button day5 = findViewById(R.id.day5);
-                day5.setText(sdfAffichage.format(daysFormatte.get(4)));
+                day4.setVisibility(View.VISIBLE);
 
-                //Placement des images des 5 prochaines jours
+
+                //Placement des images des 3 prochaines jours
                 ImageView symbd2 = findViewById(R.id.symbd2);
                 symbd2.setImageResource(listMeteoData.getImageDay(days.get(1)));
                 ImageView symbd3 = findViewById(R.id.symbd3);
                 symbd3.setImageResource(listMeteoData.getImageDay(days.get(2)));
                 ImageView symbd4 = findViewById(R.id.symbd4);
                 symbd4.setImageResource(listMeteoData.getImageDay(days.get(3)));
-                ImageView symbd5 = findViewById(R.id.symbd5);
-                symbd5.setImageResource(listMeteoData.getImageDay(days.get(4)));
 
 
-                //Modification des minimums des 5 prochains jours
+                //Modification des minimums des 3 prochains jours
                 TextView minDay2 = findViewById(R.id.minDay2);
                 minDay2.setText(String.format("%s°C", Float.toString(listMeteoData.getMinDay(days.get(1)))));
                 TextView minDay3 = findViewById(R.id.minDay3);
                 minDay3.setText(String.format("%s°C", Float.toString(listMeteoData.getMinDay(days.get(2)))));
                 TextView minDay4 = findViewById(R.id.minDay4);
                 minDay4.setText(String.format("%s°C", Float.toString(listMeteoData.getMinDay(days.get(3)))));
-                TextView minDay5 = findViewById(R.id.minDay5);
-                minDay5.setText(String.format("%s°C", Float.toString(listMeteoData.getMinDay(days.get(4)))));
 
-                //Modification des maximums des 5 prochaines jours
+                //Modification des maximums des 3 prochaines jours
                 TextView maxDay2 = findViewById(R.id.maxDay2);
                 maxDay2.setText(String.format("%s°C", Float.toString(listMeteoData.getMaxDay(days.get(1)))));
                 TextView maxDay3 = findViewById(R.id.maxDay3);
                 maxDay3.setText(String.format("%s°C", Float.toString(listMeteoData.getMaxDay(days.get(2)))));
                 TextView maxDay4 = findViewById(R.id.maxDay4);
                 maxDay4.setText(String.format("%s°C", Float.toString(listMeteoData.getMaxDay(days.get(3)))));
-                TextView maxDay5 = findViewById(R.id.maxDay5);
-                maxDay5.setText(String.format("%s°C", Float.toString(listMeteoData.getMaxDay(days.get(4)))));
-
 
             }
         }
     }
 
-    public void detailsDay1(View view){
+    public void detailsDay4(View view){
         Intent intent  = new Intent(this,DetailsDayActivity.class);
         ArrayList<String> days = listMeteoData.getDays();
-        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(4));
+        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(3));
         intent.putExtra("data", (Parcelable) dataDay);
         this.startActivity(intent);
     }
@@ -186,14 +185,6 @@ public class MeteoActivity extends AppCompatActivity {
         Intent intent  = new Intent(this,DetailsDayActivity.class);
         ArrayList<String> days = listMeteoData.getDays();
         MeteoList dataDay = this.listMeteoData.getDataDay(days.get(2));
-        intent.putExtra("data", (Parcelable) dataDay);
-        this.startActivity(intent);
-    }
-
-    public void detailsDay4(View view){
-        Intent intent  = new Intent(this,DetailsDayActivity.class);
-        ArrayList<String> days = listMeteoData.getDays();
-        MeteoList dataDay = this.listMeteoData.getDataDay(days.get(3));
         intent.putExtra("data", (Parcelable) dataDay);
         this.startActivity(intent);
     }

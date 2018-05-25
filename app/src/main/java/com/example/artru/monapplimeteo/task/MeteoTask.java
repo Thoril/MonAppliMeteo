@@ -67,14 +67,18 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
 
                 GeocodingParser parser = new GeocodingParser(xmlData);
                 dataLocation = parser.getData();
-                Log.i(TAG, "Lat:" + dataLocation.get(0).getLatitude());
-                Log.i(TAG, "Long:" + dataLocation.get(0).getLongitude());
+                if(!dataLocation.isEmpty()) {
+                    Log.i(TAG, "Lat:" + dataLocation.get(0).getLatitude());
+                    Log.i(TAG, "Long:" + dataLocation.get(0).getLongitude());
+                }
 
             } catch (IOException | XmlPullParserException e) {
                 e.printStackTrace();
             }
 
-
+            if(dataLocation.isEmpty()){
+                return null;
+            }
             //PHASE 3: recherche des données météos
             publishProgress("Connexion au serveur météo");
             try {
@@ -104,8 +108,10 @@ public class MeteoTask extends AsyncTask<String, String, ArrayList<MeteoData>> {
     protected void onPostExecute(ArrayList<MeteoData> meteoData) {
         super.onPostExecute(meteoData);
         Intent intent  = new Intent(this.parentActivity,MeteoActivity.class);
-        Log.i(TAG, "On post Execute Nombre de data Météo : " + meteoData.size());
-        Log.i(TAG, meteoData.get(0).toString());
+        if(meteoData != null) {
+            Log.i(TAG, "On post Execute Nombre de data Météo : " + meteoData.size());
+            Log.i(TAG, meteoData.get(0).toString());
+        }
         intent.putExtra("data", meteoData);
         progressDialog.dismiss();
         this.parentActivity.startActivity(intent);

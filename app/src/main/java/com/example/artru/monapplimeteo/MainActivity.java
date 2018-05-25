@@ -1,6 +1,9 @@
 package com.example.artru.monapplimeteo;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,12 +35,36 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Patientez");
         progressDialog.setMessage("Préparation...");
-        progressDialog.show();
+        Context context = this;
 
         EditText et_adresse = findViewById(R.id.adresse);
         String adresse = et_adresse.getText().toString();
 
-        MeteoTask meteoTask = new MeteoTask(this,progressDialog);
-        meteoTask.execute(adresse);
+        if (adresse.isEmpty()) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setTitle("Attention");
+            dialog.setMessage("Merci de saisir une Ville");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            dialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    MainActivity.this.finish();
+                }
+            });
+            // create alert dialog
+            AlertDialog alertDialog = dialog.create();
+            // show it
+            alertDialog.show();
+        } else {
+            progressDialog.show();
+            MeteoTask meteoTask = new MeteoTask(this,progressDialog);
+            meteoTask.execute(adresse);
+        }
+
+
     }
 }

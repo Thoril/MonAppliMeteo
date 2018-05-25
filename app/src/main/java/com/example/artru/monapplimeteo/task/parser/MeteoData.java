@@ -166,6 +166,7 @@ public class MeteoData implements Parcelable{
         int image;
         boolean night;
         int heure = this.getHeure();
+
         String symbol = this.getSymbole();
         night = heure < 8 || heure > 20;
 

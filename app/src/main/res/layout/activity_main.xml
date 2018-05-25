@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,19 +12,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="@android:dimen/thumbnail_width"
+            android:layout_height="@android:dimen/thumbnail_height"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="false"
+            app:srcCompat="@drawable/logo" />
+
         <EditText
             android:id="@+id/adresse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Entrer votres adresse"
             android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="connect"
-            android:text="@string/rechercher" />
+            android:layout_gravity="center_horizontal"
+            android:text="@string/rechercher"
+            android:textAlignment="center" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
